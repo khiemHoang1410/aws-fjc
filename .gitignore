@@ -1,0 +1,16 @@
+# AWS keys and credentials
+.aws/
+credentials
+*.pem
+
+# Terraform files (nếu sau này ông dùng)
+.terraform/
+*.tfstate
+*.tfvars
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
