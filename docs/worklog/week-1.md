@@ -9,7 +9,7 @@
 
 ### Kỹ thuật
 - [x] Khởi tạo Repository GitHub theo chuẩn dự án.
-- [ ] Hoàn tất đăng ký tài khoản AWS (Free Tier).
+- [x] Hoàn tất đăng ký tài khoản AWS (Free Tier).
 - [ ] Thiết lập hệ thống cảnh báo chi phí (Billing Alarms).
 
 ### Personal Branding
@@ -21,3 +21,9 @@
 - **Cloud Computing:** Thuê tài nguyên qua internet theo mô hình Pay-as-you-go.
 - **Tính linh hoạt (Elasticity):** Khả năng mở rộng hoặc thu hẹp tài nguyên theo nhu cầu thực tế.
 - **Bảo mật:** Nguyên tắc phân quyền tối thiểu khi bắt đầu với Cloud.
+
+
+### [2026-03-10] Milestone: Account Activated & Credits Received
+- **Status:** SUCCESSFULLY ACTIVATED.
+- **Bonus:** Received $100.00 USD AWS Credits (Valid until Sep 2026).
+- **Next Step:** Configure CloudWatch Billing Alarms to monitor credit usage and prevent overspending.
