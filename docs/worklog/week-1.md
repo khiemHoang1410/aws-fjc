@@ -1,48 +1,55 @@
-# Worklog - Week 1: Cloud Fundamentals
+# AWS Worklog - Week 1: Cloud Fundamentals & Infrastructure Baseline
 
-## 1. Mục tiêu đào tạo
+## 🎯 Training Objectives
+- **Concepts:** Nắm vững 6 lợi ích cốt lõi của Cloud Computing & mô hình Pay-as-you-go.
+- **Security:** Thiết lập môi trường AWS Account theo tiêu chuẩn Landing Zone cơ bản.
+- **Professionalism:** Xây dựng Profile & kết nối cộng đồng AWS Study Group.
 
-- Tìm hiểu khái niệm và 6 lợi ích cốt lõi của Cloud Computing.
-- Thiết lập môi trường AWS Account chuẩn cấu trúc bảo mật.
-- Xây dựng mạng lưới kết nối cộng đồng và Profile chuyên nghiệp.
-
-## 2. Danh sách nhiệm vụ (Checklist)
-
-### Kỹ thuật
-
-- [x] Khởi tạo Repository GitHub theo chuẩn dự án.
-- [x] Hoàn tất đăng ký tài khoản AWS (Free Tier).
-- [x] Thiết lập hệ thống cảnh báo chi phí (Billing Alarms).
+## 🛠️ Task Checklist
+### Technical Implementation
+- [x] **Source Control:** Khởi tạo GitHub Repository chuẩn dự án (README, .gitignore).
+- [x] **Cloud Provisioning:** Hoàn tất đăng ký AWS Free Tier (Exp: 09/2026).
+- [x] **Governance:** Thiết lập CloudWatch Billing Alarms & Zero-Threshold Budget.
 
 ### Personal Branding
+- [x] **LinkedIn Profile:** Updated "Bootcamp - First Cloud AI Journey @ AWS Study Group".
+- [x] **Community:** Sync-up thành công với Admin & cộng đồng học tập.
 
-- [x] Cập nhật thông tin nhận diện trên các nền tảng liên lạc.
-- [x] Thiết lập Job Title trên LinkedIn: **Bootcamp - First Cloud AI Journey @ AWS Study Group**.
-- [x] Kết nối với đội ngũ Admin và cộng đồng học tập.
+---
 
-## 3. Kiến thức trọng tâm
+## 🧠 Technical Deep Dive
 
-- **Cloud Computing:** Thuê tài nguyên qua internet theo mô hình Pay-as-you-go.
-- **Tính linh hoạt (Elasticity):** Khả năng mở rộng hoặc thu hẹp tài nguyên theo nhu cầu thực tế.
-- **Bảo mật:** Nguyên tắc phân quyền tối thiểu khi bắt đầu với Cloud.
+### 🛡️ Identity & Access Management (IAM)
+- **Root Lockdown:** Thực hiện "niêm phong" tài khoản Root sau khi kích hoạt MFA.
+- **IAM Hierarchy:** Triển khai cấu trúc nhóm quyền `Admins` với policy `AdministratorAccess`. 
+    - *Best Practice:* Quản lý quyền qua Group thay vì gán trực tiếp cho User để đảm bảo tính Scalability.
+- **Identity:** Cấu hình Account Alias `zehel-cloud` giúp chuyên nghiệp hóa quy trình login.
+
+### 🖥️ Compute & Network (EC2)
+- **Instance Provisioning:** Launch `t3.micro` (Amazon Linux 2023) tại Region `ap-southeast-1` (Singapore).
+- **Security Group (SG):** Cấu hình Port 22 (SSH).
+    - *Note:* Hiện mở `0.0.0.0/0` để thực hành, sẽ thu hồi về White-list IP ở phase sau để tuân thủ **Least Privilege**.
+- **Key Management:** Khởi tạo RSA Key pair, thực hiện `chmod 400` và lưu trữ local an toàn.
+
+---
 
 ## 💡 Lessons Learned & Troubleshooting
-- **Issue:** Thẻ Bank không thanh toán được AWS nếu như trong tài khoản không có số dư trên 1$.
-- **Solution:** Phải vào App bật "Giao dịch Internet" và "Thanh toán quốc tế", đồng thời nạp dư khoảng 50k-100k để AWS verify account.
-- **Key Takeaway:** Bảo mật là ưu tiên hàng đầu (Security is Job Zero). Luôn sử dụng MFA cho tài khoản Root ngay sau khi tạo.
 
-### [2026-03-10] Milestone: Account Activated & Credits Received
-- **Status:** SUCCESSFULLY ACTIVATED.
-- **Update:** Đã xác thực thành công phương thức thanh toán sau khi cấu hình lại hạn mức thẻ.
-- **Bonus:** Nhận $100.00 USD AWS Credits (Hạn dùng đến tháng 09/2026).
-- **Next Step:** Cấu hình CloudWatch Billing Alarms để giám sát hạn mức Credit và tránh phát sinh chi phí ngoài ý muốn.
+| Issue | Root Cause | Solution |
+| :--- | :--- | :--- |
+| **AWS Registration Fail** | Tài khoản thẻ không đủ số dư verify ($1). | Nạp số dư > 50k VNĐ, bật "Thanh toán quốc tế" trên Mobile App. |
+| **Security Risk** | Quên MFA cho tài khoản đặc quyền. | **Security is Job Zero:** Kích hoạt MFA ngay lập tức cho Root & Admin. |
+| **Billing Management** | Lo ngại phát sinh chi phí ngoài Free Tier. | Thiết lập **Zero-Threshold Budget ($0.01)** để nhận cảnh báo tức thì. |
 
-### [2026-03-11] Update: IAM Administration Setup
-- **Created IAM User:** Tài khoản đã được thiết lập với quyền `AdministratorAccess`.
-#### Update: Zero-Threshold Budget & MFA
-- **MFA Secured:** Đã kích hoạt bảo mật 2 lớp cho tài khoản Admin, chính thức "niêm phong" tài khoản Root.
-- **Zero-Threshold Budget:** Thiết lập hạn mức $0.01/tháng để tối ưu hóa Free Tier và nhận diện chi phí phát sinh tức thì.
-#### Update: First EC2 Instance Launched
-- **Configuration:** Đã chọn `t3.micro` và `Amazon Linux 2023` theo chuẩn Free Tier để tối ưu chi phí.
-- **Identity Management:** Khởi tạo Key pair và lưu trữ local an toàn.
-- **Network:** Thiết lập Security Group cho phép SSH (Port 22) từ mọi nguồn (0.0.0.0/0) để thực hành.
+---
+
+## 📅 Timeline & Milestones
+
+### [2026-03-10] Foundation Established
+- **Status:** Account Activated.
+- **Update:** Xác thực thành công phương thức thanh toán & nhận $100 AWS Credit.
+
+### [2026-03-11] Lab 1: Infrastructure Ready
+- **Status:** **FULLY COMPLETED.**
+- **Environment:** Console đã được tùy chỉnh (Pinned: EC2, S3, IAM, Billing).
+- **Next Task:** Nghiên cứu VPC Architecture & triển khai Web Server đầu tiên.
