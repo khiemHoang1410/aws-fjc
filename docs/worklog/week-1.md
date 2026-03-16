@@ -18,6 +18,8 @@
 - [x] **Routing:** Cấu hình Internet Gateway và Route Table để điều phối lưu lượng mạng.
 - [x] **External Connectivity:** Cấu hình Internet Gateway (IGW) và Route Table cho VPC.
 - [x] **Validation:** Xác thực kết nối SSH qua Elastic IP thành công.
+- [x] **Process Management:** Triển khai PM2 để quản trị vòng đời ứng dụng.
+- [x] **Availability:** Cấu hình Daemon cho API/Service đảm bảo vận hành 24/7.
 
 ### Personal Branding
 - [x] **LinkedIn Profile:** Cập nhật thông tin: "Bootcamp - First Cloud AI Journey @ AWS Study Group".
@@ -54,6 +56,11 @@
 - **Private Subnet (`10.0.2.0/24`):** Thiết lập vùng an toàn cho Database/Backend, ngăn chặn truy cập trực tiếp từ Internet.
 - **Gateway & Routing:** Attach **Internet Gateway (IGW)** và cấu hình Route Table (`0.0.0.0/0 -> IGW`) để kích hoạt kết nối Internet cho phân vùng Public.
 
+### 🔄 Service Optimization & Daemonization
+- **Process Management:** Sử dụng **PM2 (Process Manager 2)** để quản lý các tiến trình chạy ngầm, thay thế phương thức chạy thủ công qua Terminal.
+- **High Availability:** Thiết lập cơ chế tự động khởi động lại (Auto-restart) khi tiến trình gặp sự cố, đảm bảo dịch vụ duy trì trạng thái **Zero Downtime**.
+- **Log Monitoring:** Triển khai giám sát log tập trung qua PM2 Logs giúp tối ưu hóa quy trình truy vết và xử lý lỗi thời gian thực.
+
 ### 📦 Storage & Content Delivery (S3)
 - **Static Hosting:** Kích hoạt tính năng **Static Website Hosting**, thiết lập `index.html` làm entry point cho ứng dụng.
 - **Access Control:** Triển khai **Bucket Policy** (JSON) cấp quyền `s3:GetObject` cho Public Access, cho phép người dùng truy cập nội dung qua Internet.
@@ -75,27 +82,29 @@
 
 ## 📅 Timeline & Milestones
 
-### [2026-03-10] Foundation Established
+### [2026-03-10] Phase 1: Project Initiation & Governance
 - **Status:** **ACCOUNT ACTIVATED.**
-- **Update:** Hoàn tất xác thực thanh toán và nhận $100 AWS Credit.
+- **Details:** Hoàn tất xác thực phương thức thanh toán và kích hoạt tài khoản thành công.
+- **Update:** Xác nhận nhận **$100.00 USD AWS Credits** phục vụ quá trình đào tạo.
 
-### [2026-03-11] Lab 1: Infrastructure Ready
+### [2026-03-11] Phase 2: Security & Static Storage Baseline
 - **Status:** **FULLY COMPLETED.**
-- **Environment:** Tùy chỉnh Console điều hướng (Pinned: EC2, S3, IAM, Billing).
+- **Foundation:** Tùy chỉnh Console điều hướng (Pinned: EC2, S3, IAM, Billing) để tối ưu workflow.
+- **S3 Hosting (Part 1):** Khởi tạo thành công S3 Bucket và Endpoint truy cập công khai.
 
-#### S3 Static Website Hosting (Part 1)
+### [2026-03-12] Phase 3: Compute Provisioning & Website Deployment
 - **Status:** **SUCCESSFULLY DEPLOYED.**
-- **Update:** Hoàn tất cấu hình Hosting và Endpoint truy cập công khai.
+- **S3 Finalization:** Tri ển khai thành công Access Policy và cơ chế bảo vệ dữ liệu với **S3 Versioning**.
+- **EC2 Web Server:** Khởi tạo `t3.mic
+- **Segmentation:** Phân chia Public/Private Subnet chuẩn xác, sẵn sàng cho mô hình Multi-tier Architecture.
 
+### [2026-03-14] Phase 5: Service Optimization & Reliability
+- **Status:** **OPERATIONAL.**ro` chạy Apache Engine ổn định trên nền tảng **Elastic IP**.
+- **Next Task:** Nghiên cứu tích hợp CI/CD hoặc triển khai Database (RDS).
 
-### [2026-03-12] S3 Static Website Hosting - SUCCESS
-- **Status:** **WEBSITE IS LIVE.**
-- **Update:** Triển khai thành công Access Policy và cơ chế bảo vệ dữ liệu Versioning.
-#### Deploying Web Server on EC2
-- **Status:** **SUCCESSFULLY PROVISIONED.**
-- **Update:** Server vận hành ổn định trên nền tảng Elastic IP và Apache Engine.
-- **Next Step:** Tích hợp quy trình CI/CD hoặc triển khai tầng dữ liệu (RDS).
-
-### [2026-03-14] Networking with VPC - COMPLETED
+### [2026-03-14] Phase 4: Advanced Network Architecture (VPC)
 - **Status:** **INFRASTRUCTURE READY.**
-- **Update:** Hoàn tất thiết lập hạ tầng mạng Custom VPC, sẵn sàng triển khai mô hình Multi-tier Architecture.
+- **Networking:** Hoàn tất thiết kế hạ tầng **Custom VPC** (`Zehel-VPC`).
+- **Process Management:** Chuyển đổi kiến trúc vận hành sang chế độ background process với **PM2**.
+- **Availability:** Đảm bảo dịch vụ chạy ngầm 24/7 với cơ chế tự động khởi động lại và giám sát Log thời gian thực.
+- **Next Step:** Thiết lập quy trình đồng bộ mã nguồn tự động trực tiếp từ GitHub Repo.
