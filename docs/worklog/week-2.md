@@ -21,8 +21,7 @@ Trong tuần này, các mục tiêu chiến lược được đề ra bao gồm:
 * **DevOps Automation:** Thiết lập và chuẩn hóa quy trình CI/CD (Continuous Integration/Continuous Deployment) khép kín, từ việc đẩy mã nguồn lên GitHub đến việc tự động triển khai trực tiếp lên hạ tầng AWS.
 * **Infrastructure Monitoring:** Triển khai giải pháp giám sát sức khỏe hệ thống toàn diện thông qua **Amazon CloudWatch**, thiết lập các ngưỡng cảnh báo tự động để phát hiện và xử lý sự cố kịp thời.
 * **Serverless Paradigm:** Tiếp cận và làm chủ công nghệ SST v3 (Ion) để quản lý tài nguyên Cloud thông qua mã nguồn (Infrastructure as Code).
-
----
+- **Secure Media Ingestion:** Triển khai quy trình upload nhạc bảo mật qua **S3 Pre-signed URLs**, tối ưu hóa băng thông Server.---
 
 ## 📅 2. Nhật ký công việc chi tiết (Detailed Worklog)
 
@@ -34,10 +33,9 @@ Dưới đây là bảng tổng hợp các đầu việc đã được thực hi
 | **2** | **Infrastructure Re-engineering & CLI Mastery:** <br> - Thực hiện Cleanup tài nguyên cũ để tối ưu hóa Budget. <br> - Tái cấu hình toàn bộ hạ tầng mạng và server thông qua AWS CLI. <br> - Gán Elastic IP (`54.251.43.8`) và ánh xạ DNS cho `hskhiem.io.vn`. | 03/17/2026 | 03/17/2026 | [AWS CLI Reference](https://awscli.amazonaws.com/v2/documentation/api/latest/index.html) |
 | **3** | **Frontend Orchestration & Modern Runtime:** <br> - Nâng cấp môi trường thực thi lên Node.js v20 (LTS). <br> - Triển khai React + Vite 6 trên nền tảng Nginx Proxy. <br> - Cấu hình SSH Key kết nối an toàn giữa EC2 và GitHub. | 03/18/2026 | 03/18/2026 | [Vite 6 Guide](https://vitejs.dev/guide/) |
 | **4** | **System Permission & Ownership:** <br> - Cấu hình Access Control List (ACL) cho Web Server. <br> - Xử lý Merge Conflicts phức tạp khi tích hợp các nhánh mã nguồn. <br> - Tối ưu hóa bảo mật hệ thống Linux (Permissions/Ownership). | 03/19/2026 | 03/20/2026 | [Linux Permissions](https://linux.die.net/man/1/chmod) |
-| **5** | **Live API & Serverless Implementation:** <br> - Triển khai **SST v3 (Ion)** kết hợp AWS Lambda và API Gateway. <br> - Can thiệp vào **SSM Parameter Store** để khôi phục Metadata hệ thống. <br> - Kích hoạt Endpoint Health Check và hoàn tất dự án. | 03/21/2026 | 03/21/2026 | [SST v3 Documentation](https://sst.dev/docs/) |
+| **5** | **Live API & Serverless Implementation:** <br> - Triển khai **SST v3 (Ion)** kết hợp AWS Lambda và API Gateway. <br> - Can thiệp vào **SSM Parameter Store** để khôi phục Metadata hệ thống. <br> - Kích hoạt Endpoint Health Check và hoàn tất dự án. <br> **Media Backend:** Triển khai Lambda `getUploadUrl`. Upload nhạc thành công qua Postman. Audit: **0 vulnerabilities**. | 03/21/2026 | 03/21/2026 | [SST v3 Documentation](https://sst.dev/docs/) |
 
 ---
-
 
 ## 🏆 3. Kết quả đạt được (Key Achievements)
 
@@ -47,6 +45,8 @@ Dưới đây là bảng tổng hợp các đầu việc đã được thực hi
 * **Security (SSL/TLS):** 100% lưu lượng truy cập được mã hóa qua HTTPS với chứng chỉ Let's Encrypt, thực thi chính sách HSTS và Force HTTPS để bảo mật dữ liệu người dùng.
 * **Serverless Success:** Triển khai thành công API Serverless với SST v3, tích hợp Lambda và API Gateway tại Region Singapore (`ap-southeast-1`).
 * **Domain & DNS:** Làm chủ hoàn toàn luồng quản trị tên miền thông qua Route 53 Hosted Zones với các bản ghi A và CNAME chuẩn xác.
+- **Secure Upload Flow:** Xây dựng thành công tính năng upload nhạc cho Spotify Clone. Sử dụng `fileId` (UUID) và `key` định danh chính xác trong S3 bucket.
+- **Security Audit:** Hệ thống backend đạt trạng thái sạch hoàn toàn (**Found 0 vulnerabilities**), đảm bảo tiêu chuẩn an toàn cho dự án lớn.
 
 ### Phát triển chuyên môn
 * **Problem Solving:** Khả năng xử lý các xung đột mã nguồn (Merge Conflicts) và lỗi hệ thống (Permissions, Port Conflict) một cách chuyên nghiệp.
@@ -70,6 +70,11 @@ Hệ thống sử dụng Nginx không chỉ như một Web Server mà còn đón
     * **Resource Linking:** Tận dụng cơ chế link mới giúp Lambda truy cập trực tiếp vào các tài nguyên khác (S3, DynamoDB) mà không cần ARN.
     * **State Recovery:** Khi Metadata bị lỗi, việc can thiệp trực tiếp vào **SSM Parameter Store** là kỹ thuật cao cấp để khôi phục trạng thái hệ thống mà không cần phá hủy và xây dựng lại từ đầu.
 
+### 🎵 Media Ingestion Flow (S3 Pre-signed URL)
+Hệ thống sử dụng cơ chế **Direct-to-S3** để tối ưu hiệu suất:
+1. **Lambda `getUploadUrl`**: Tiếp nhận yêu cầu, tạo URL có chữ ký bảo mật (Signature) và thời gian hết hạn (Expires: 300s).
+2. **Postman Validation**: Xác thực thành công luồng trả về `uploadUrl` kèm các tham số `X-Amz-Algorithm`, `X-Amz-Credential`, giúp Client đẩy file trực tiếp lên S3 mà không cần qua Backend trung gian.
+
 ---
 
 ## 💡 5. Xử lý sự cố & Bài học kinh nghiệm (Troubleshooting)
@@ -82,5 +87,5 @@ Hệ thống sử dụng Nginx không chỉ như một Web Server mà còn đón
 | **Vite Access Denied** | Chính sách bảo mật mặc định của Vite chặn truy cập từ IP/Domain ngoại vi. | Bổ sung mảng `allowedHosts` chứa domain của dự án vào file cấu hình `vite.config.ts`. |
 | **Missing Bootstrap Bucket** | SST v3 mất dấu Metadata sau quá trình dọn dẹp tài nguyên. | Can thiệp thủ công vào **AWS SSM Parameter Store** để tái thiết lập liên kết cho Metadata. |
 | **Lambda Outbound Timeout** | Lambda nằm trong Private Subnet nhưng thiếu NAT Gateway để ra Internet. | Triển khai NAT Gateway hoặc chuyển cấu hình mạng phù hợp để Lambda có thể gửi Request ra ngoài. |
-
+| **S3 Signature Match** | Lỗi xác thực khi tham số URL không khớp với Header. | Đảm bảo `X-Amz-Signature` và `X-Amz-Security-Token` được truyền đầy đủ từ Lambda response. |
 ---
