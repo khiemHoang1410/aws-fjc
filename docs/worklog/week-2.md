@@ -1,98 +1,86 @@
-# AWS Worklog - Week 2: High Availability & Scalability
+# AWS Cloud Infrastructure & Serverless Implementation - Week 2
 
-## 🎯 Training Objectives
+## 📝 Project Overview
+- **Student:** [Tên của ông]
+- **Role:** Cloud Intern / AWS Learner
+- **Batch:** Bootcamp - First Cloud AI Journey @ AWS Study Group
+- **Duration:** 10/03/2026 - 14/03/2026
+- **Stack:** AWS (EC2, S3, VPC, IAM), Linux (AL2023), Apache, PM2.
 
-- **Availability:** Triển khai kiến trúc Multi-AZ (Availability Zones) để loại bỏ Single Point of Failure.
-- **Scalability:** Tự động hóa việc mở rộng tài nguyên dựa trên lưu lượng thực tế (Auto Scaling).
-- **Automation:** Xây dựng quy trình CI/CD hoàn chỉnh từ GitHub Repo tới hạ tầng AWS.
-- **Monitoring:** Giám sát sức khỏe hệ thống và thiết lập cảnh báo tự động qua CloudWatch.
-
-## 🛠️ Task Checklist
-
-- [x] **Runtime Environment:** Nâng cấp Node.js v20 (via NVM) tương thích Vite 6.
-- [x] **Source Management:** Cấu hình SSH kết nối GitHub và xử lý Merge Conflicts.
-- [x] **Frontend Deployment:** Triển khai React + Vite, cấu hình `allowedHosts` cho Production.
-- [x] **Web Orchestration:** Thiết lập Nginx Reverse Proxy (Port 80 -> 5173).
-
-### Technical Implementation
-
-- [x] **Web Server:** Cấu hình Nginx làm Reverse Proxy, tối ưu hóa điều hướng traffic.
-- [x] **Network & DNS:** Thiết lập Route 53, cấu hình A/CNAME Record và tích hợp External Registrar.
-- [x] **Security (SSL/TLS):** Triển khai HTTPS với Let's Encrypt (Certbot) đảm bảo an toàn dữ liệu.
-- [x] **System Permissions:** Cấu hình Access Control List (ACL) cho phép Web Server truy cập mã nguồn.
-- [x] **Domain Management:** Quản trị Custom Domain qua AWS Route 53.
-- [x] **DNS Orchestration:** Cấu hình và điều hướng Name Servers từ Registrar bên thứ 3.
-- [x] **Security (SSL/TLS):** Thực thi giao thức HTTPS bảo mật trên Nginx.
-- [x] **Resource Optimization:** Thực hiện Cleanup toàn bộ tài nguyên cũ, tối ưu hóa Budget.
-
-### Professional Growth
-
-- [ ] **Technical Writing:** Cập nhật tài liệu Architecture Diagram cho tuần 2.
-- [ ] **Networking:** Tham gia thảo luận về tối ưu hóa chi phí (Cost Optimization) trong cộng đồng.
+## 📝 Project Overview
+Tài liệu này tổng hợp chi tiết lộ trình triển khai, cấu hình và tối ưu hóa hạ tầng điện toán đám mây trên nền tảng **Amazon Web Services (AWS)** trong tuần thứ 2. Trọng tâm của giai đoạn này là sự dịch chuyển mang tính chiến lược từ kiến trúc Monolithic truyền thống sang mô hình **Serverless (SST v3 - Ion)**. Mục tiêu cuối cùng là thiết lập một hệ thống có khả năng tự động mở rộng (Scalability), tối ưu hóa chi phí vận hành và đảm bảo tính sẵn sàng cao (High Availability) trên nhiều vùng khả dụng (Multi-AZ).
 
 ---
 
-## 🧠 Technical Deep Dive
+# 🎯 1. Mục tiêu đào tạo (Training Objectives)
 
-### 🌐 Edge Networking & Web Server (Nginx)
+Trong tuần này, các mục tiêu chiến lược được đề ra bao gồm:
 
-- **Port Conflict Resolution:** Xử lý xung đột cổng 80 bằng cách terminate các tiến trình chiếm dụng trái phép, giải phóng tài nguyên cho Nginx.
-- **Reverse Proxy Configuration:** Thiết lập `nginx.conf` với các chỉ thị `root` và `proxy_pass`, đảm bảo luồng dữ liệu từ Port 80 được định tuyến chính xác vào thư mục dự án.
-- **Permission Hardening:** Điều chỉnh quyền truy cập hệ thống (Linux Permissions) tại thư mục người dùng, cho phép Nginx worker có quyền `read/execute` để phục vụ nội dung tĩnh mà không vi phạm quy tắc bảo mật.
-
-### 🌐 DNS & Edge Security
-
-- **Route 53 Integration:** Chuyển đổi quyền quản lý bản ghi từ Registrar bên thứ ba về **AWS Route 53**. Thiết lập hệ thống **Hosted Zone** với các bản ghi **A Record** (trỏ về Elastic IP) và **CNAME**, tối ưu hóa tốc độ phân giải tên miền toàn cầu.
-- **SSL/TLS Implementation:** Triển khai chứng chỉ bảo mật (Let's Encrypt) thông qua Certbot. Cấu hình Nginx để thực thi chính sách **HSTS** và **Force HTTPS**, đảm bảo toàn bộ dữ liệu người dùng được mã hóa trên đường truyền.
-
-### 🔐 Security & Domain Management
-
-- **DNS Infrastructure:** Triển khai **Route 53 Hosted Zones**. Thực hiện cấu hình **A Record** trỏ về Elastic IP và **CNAME** cho các sub-domain. Tích hợp thành công với NameServer của bên thứ 3.
-- **SSL/TLS Encryption:** Sử dụng **Certbot** để tự động hóa quy trình cấp phát và gia hạn chứng chỉ **Let's Encrypt**. Cấu hình Force HTTPS để mã hóa toàn bộ lưu lượng giữa Client và Server.
-
-### 🚀 Modern Frontend Deployment (React + Vite 6)
-
-- **Runtime Optimization:** Sử dụng **NVM (Node Version Manager)** để quản trị đa phiên bản Node.js. Nâng cấp lên **v20 (LTS)** nhằm đáp ứng các yêu cầu khắt khe về hiệu năng và bảo mật của **Vite 6**.
-- **DevOps Workflow:** Thiết lập kết nối an toàn qua **SSH Key** giữa EC2 và GitHub. Xử lý thành công các xung đột mã nguồn (Merge Conflicts) trong quá trình tích hợp nhánh `huy` vào `main`, đảm bảo tính toàn vẹn của Repo.
-- **Vite Production Config:** Cấu hình `allowedHosts` trong Vite để server chấp nhận các Request từ Domain định danh thay vì chỉ giới hạn ở `localhost`.
-
-### 🛰️ Network & Proxy Management (Nginx)
-
-- **Security Group Hardening:** Tối ưu hóa Firewall lớp mạng (Port 22, 80, 5173), cân bằng giữa khả năng truy cập và tính bảo mật.
-- **Reverse Proxy Implementation:** Cấu hình Nginx đóng vai trò là "người tiền trạm". Mọi yêu cầu gửi đến Port 80 (HTTP) sẽ được điều hướng ngầm về Port 5173 của ứng dụng Vite.
-  - **Benefit:** Giúp người dùng truy cập trực tiếp qua `hskhiem.io.vn` mà không cần lộ thông tin về Port vận hành nội bộ, tăng tính thẩm mỹ và bảo mật cho ứng dụng.
+* **High Availability & Fault Tolerance:** Thiết kế và triển khai kiến trúc trên nhiều Availability Zones (Multi-AZ) nhằm loại bỏ hoàn toàn các điểm nghẽn đơn lẻ (Single Point of Failure), đảm bảo hệ thống vẫn vận hành ổn định ngay cả khi một vùng gặp sự cố.
+* **Elastic Scalability:** Xây dựng cơ chế tự động hóa việc co giãn tài nguyên (Auto Scaling) dựa trên phân tích lưu lượng truy cập thực tế, giúp cân bằng giữa hiệu năng và chi phí.
+* **DevOps Automation:** Thiết lập và chuẩn hóa quy trình CI/CD (Continuous Integration/Continuous Deployment) khép kín, từ việc đẩy mã nguồn lên GitHub đến việc tự động triển khai trực tiếp lên hạ tầng AWS.
+* **Infrastructure Monitoring:** Triển khai giải pháp giám sát sức khỏe hệ thống toàn diện thông qua **Amazon CloudWatch**, thiết lập các ngưỡng cảnh báo tự động để phát hiện và xử lý sự cố kịp thời.
+* **Serverless Paradigm:** Tiếp cận và làm chủ công nghệ SST v3 (Ion) để quản lý tài nguyên Cloud thông qua mã nguồn (Infrastructure as Code).
 
 ---
 
-## 💡 Lessons Learned & Troubleshooting
+## 📅 2. Nhật ký công việc chi tiết (Detailed Worklog)
 
-| Issue                   | Root Cause                                       | Solution                                                               |
-| :---------------------- | :----------------------------------------------- | :--------------------------------------------------------------------- |
-| **Port 80 Conflict**    | Tiến trình PM2 cũ chưa được terminate hoàn toàn. | Sử dụng `lsof -i :80` để tìm PID và `kill` tiến trình đang chiếm dụng. |
-| **Nginx 403 Forbidden** | Thiếu quyền truy cập thư mục gốc (Permissions).  | Cấu hình `chmod` và `chown` phù hợp cho user `nginx` hoặc `www-data`.  |
-| **SSL Challenge Fail**  | DNS chưa cập nhật hoặc Port 80 bị chặn.          | Kiểm tra bản ghi A Record và Security Group, sau đó chạy lại Certbot.  |
-**Merge Conflict** | Sai lệch lịch sử Commit giữa các nhánh local và remote. | Sử dụng `git merge`, giải quyết thủ công các file xung đột và commit lại. |
-| **Vite Access Denied** | Chính sách bảo mật của Vite ngăn chặn truy cập từ Host bên ngoài. | Bổ sung cấu hình `server: { allowedHosts: [...] }` trong file `vite.config.ts`. |
-| **Node.js Incompatibility** | Phiên bản mặc định của OS quá cũ cho Vite 6. | Sử dụng NVM để cài đặt và `nvm use 20` làm phiên bản thực thi chính thức. |
+Dưới đây là bảng tổng hợp các đầu việc đã được thực hiện xuyên suốt từ ngày 16/03 đến 21/03/2026:
+
+| Day | Task Details | Start Date | Completion Date | Reference Material |
+|:---:|:---|:---:|:---:|:---|
+| **1** | **Edge Networking & Security Hardening:** <br> - Cấu hình Nginx làm Reverse Proxy. <br> - Chuyển đổi quyền quản trị DNS từ Registrar bên thứ 3 về **AWS Route 53**. <br> - Triển khai HTTPS bằng Let's Encrypt (Certbot). | 03/16/2026 | 03/16/2026 | [AWS Route 53 Docs](https://docs.aws.amazon.com/route53/) |
+| **2** | **Infrastructure Re-engineering & CLI Mastery:** <br> - Thực hiện Cleanup tài nguyên cũ để tối ưu hóa Budget. <br> - Tái cấu hình toàn bộ hạ tầng mạng và server thông qua AWS CLI. <br> - Gán Elastic IP (`54.251.43.8`) và ánh xạ DNS cho `hskhiem.io.vn`. | 03/17/2026 | 03/17/2026 | [AWS CLI Reference](https://awscli.amazonaws.com/v2/documentation/api/latest/index.html) |
+| **3** | **Frontend Orchestration & Modern Runtime:** <br> - Nâng cấp môi trường thực thi lên Node.js v20 (LTS). <br> - Triển khai React + Vite 6 trên nền tảng Nginx Proxy. <br> - Cấu hình SSH Key kết nối an toàn giữa EC2 và GitHub. | 03/18/2026 | 03/18/2026 | [Vite 6 Guide](https://vitejs.dev/guide/) |
+| **4** | **System Permission & Ownership:** <br> - Cấu hình Access Control List (ACL) cho Web Server. <br> - Xử lý Merge Conflicts phức tạp khi tích hợp các nhánh mã nguồn. <br> - Tối ưu hóa bảo mật hệ thống Linux (Permissions/Ownership). | 03/19/2026 | 03/20/2026 | [Linux Permissions](https://linux.die.net/man/1/chmod) |
+| **5** | **Live API & Serverless Implementation:** <br> - Triển khai **SST v3 (Ion)** kết hợp AWS Lambda và API Gateway. <br> - Can thiệp vào **SSM Parameter Store** để khôi phục Metadata hệ thống. <br> - Kích hoạt Endpoint Health Check và hoàn tất dự án. | 03/21/2026 | 03/21/2026 | [SST v3 Documentation](https://sst.dev/docs/) |
 
 ---
 
-## 📅 Timeline & Milestones
 
-### [2026-03-16] Phase 7: Edge Networking & Security Hardening
+## 🏆 3. Kết quả đạt được (Key Achievements)
 
-- **Status:** **SUCCESSFULLY SECURED.**
-- **Update:** Hoàn tất cấu hình Nginx, trỏ Domain thành công qua Route 53 và kích hoạt HTTPS.
-- **Current State:** Hệ thống đã live với giao thức bảo mật SSL, sẵn sàng cho người dùng truy cập.
+### Kỹ thuật & Hạ tầng
+* **Runtime Environment:** Nâng cấp thành công môi trường Node.js v20 qua NVM, đảm bảo tương thích hoàn toàn với các tính năng mới nhất của Vite 6.
+* **Web Orchestration:** Triển khai hệ thống Nginx làm Reverse Proxy ổn định, điều hướng mượt mà traffic từ Port 80 về ứng dụng nội bộ.
+* **Security (SSL/TLS):** 100% lưu lượng truy cập được mã hóa qua HTTPS với chứng chỉ Let's Encrypt, thực thi chính sách HSTS và Force HTTPS để bảo mật dữ liệu người dùng.
+* **Serverless Success:** Triển khai thành công API Serverless với SST v3, tích hợp Lambda và API Gateway tại Region Singapore (`ap-southeast-1`).
+* **Domain & DNS:** Làm chủ hoàn toàn luồng quản trị tên miền thông qua Route 53 Hosted Zones với các bản ghi A và CNAME chuẩn xác.
 
-### [2026-03-17] Phase 8: Infrastructure Re-engineering & CLI Mastery
+### Phát triển chuyên môn
+* **Problem Solving:** Khả năng xử lý các xung đột mã nguồn (Merge Conflicts) và lỗi hệ thống (Permissions, Port Conflict) một cách chuyên nghiệp.
+* **IaC Mastery:** Hiểu sâu về cơ chế Resource Linking của SST v3, thay thế các biến môi trường thủ công bằng hệ thống Type-safe mạnh mẽ.
 
-- **Status:** **SUCCESSFULLY RE-PROVISIONED.**
-- **Cleanup:** Giải phóng tài nguyên cũ để tối ưu hóa hạn mức tín dụng .
-- **Execution:** Xây dựng lại toàn bộ hạ tầng mạng và server qua CLI.
-- **Connectivity:** Gán Elastic IP (`54.251.43.8`) và hoàn tất ánh xạ DNS cho `hskhiem.io.vn`. Hệ thống hiện đã sẵn sàng phục vụ traffic thực tế.
+---
+## 🧠 4. Phân tích kỹ thuật (Technical Deep Dive)
 
-### [2026-03-18] Phase 9: Frontend Orchestration & Modern Runtime
-- **Status:** **OPERATIONAL.**
-- **Update:** Hoàn tất triển khai ứng dụng React/Vite 6 trên nền tảng Node v20.
-- **Infrastructure:** Hệ thống đã thông suốt từ GitHub -> EC2 -> Nginx -> Domain. Người dùng có thể truy cập qua URL chuẩn mà không cần chỉ định Port.
+### 🌐 Edge Networking & Nginx Reverse Proxy
+Hệ thống sử dụng Nginx không chỉ như một Web Server mà còn đóng vai trò "người tiền trạm" (Reverse Proxy).
+* **Port Forwarding:** Mọi yêu cầu HTTP (Port 80) được chuyển tiếp ngầm đến Port 5173 của Vite. Điều này giúp bảo vệ cổng vận hành ứng dụng bên trong và tạo ra URL thân thiện với người dùng (`hskhiem.io.vn`).
+* **Permission Hardening:** Giải quyết bài toán bảo mật bằng cách điều chỉnh ACL cho thư mục dự án, cho phép tiến trình `nginx` hoặc `www-data` có quyền đọc nhưng không vi phạm nguyên tắc đặc quyền tối thiểu.
+
+### 🔐 DNS & Security Infrastructure
+* **Route 53 Orchestration:** Việc chuyển Name Servers về AWS Route 53 giúp tận dụng khả năng phân giải DNS độ trễ thấp toàn cầu. Các bản ghi A Record được ánh xạ trực tiếp tới Elastic IP cố định.
+* **SSL Automation:** Sử dụng **Certbot** để tự động hóa quy trình cấp phát và gia hạn chứng chỉ. Nginx được cấu hình để tự động redirect toàn bộ traffic không bảo mật (HTTP) sang giao thức bảo mật (HTTPS).
+
+### 🚀 Modern Frontend & Serverless Integration
+* **Vite 6 Configuration:** Đặc biệt chú trọng vào việc cấu hình `allowedHosts` trong `vite.config.ts`. Đây là cơ chế bảo mật quan trọng của Vite nhằm ngăn chặn các cuộc tấn công giả mạo Host.
+* **SST v3 (Ion) Architecture:**
+    * **Resource Linking:** Tận dụng cơ chế link mới giúp Lambda truy cập trực tiếp vào các tài nguyên khác (S3, DynamoDB) mà không cần ARN.
+    * **State Recovery:** Khi Metadata bị lỗi, việc can thiệp trực tiếp vào **SSM Parameter Store** là kỹ thuật cao cấp để khôi phục trạng thái hệ thống mà không cần phá hủy và xây dựng lại từ đầu.
+
+---
+
+## 💡 5. Xử lý sự cố & Bài học kinh nghiệm (Troubleshooting)
+
+| Tình huống (Issue) | Nguyên nhân (Root Cause) | Giải pháp (Solution) |
+| :--- | :--- | :--- |
+| **Port 80 Conflict** | Tiến trình PM2 cũ chưa được dừng, chiếm dụng cổng 80. | Sử dụng `lsof -i :80` để truy tìm PID và thực hiện `kill -9` để giải phóng tài nguyên. |
+| **Nginx 403 Forbidden** | User chạy Nginx không có quyền `x` (execute) trên các thư mục cha. | Cấu hình lại `chmod` và đảm bảo thư mục gốc dự án có phân quyền phù hợp cho Web Server. |
+| **SSL Challenge Fail** | DNS chưa kịp cập nhật hoặc Security Group chặn Inbound Port 80. | Kiểm tra trạng thái phân giải tên miền và mở Port 80 trong SG trước khi chạy lại Certbot. |
+| **Vite Access Denied** | Chính sách bảo mật mặc định của Vite chặn truy cập từ IP/Domain ngoại vi. | Bổ sung mảng `allowedHosts` chứa domain của dự án vào file cấu hình `vite.config.ts`. |
+| **Missing Bootstrap Bucket** | SST v3 mất dấu Metadata sau quá trình dọn dẹp tài nguyên. | Can thiệp thủ công vào **AWS SSM Parameter Store** để tái thiết lập liên kết cho Metadata. |
+| **Lambda Outbound Timeout** | Lambda nằm trong Private Subnet nhưng thiếu NAT Gateway để ra Internet. | Triển khai NAT Gateway hoặc chuyển cấu hình mạng phù hợp để Lambda có thể gửi Request ra ngoài. |
+
+---

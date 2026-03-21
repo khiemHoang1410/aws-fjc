@@ -1,110 +1,87 @@
-# AWS Worklog - Week 1: Cloud Fundamentals & Infrastructure Baseline
+# ☁️ AWS Cloud Journey | Week 1: Infrastructure Foundations
 
-## 🎯 Training Objectives
-- **Concepts:** Nắm vững 06 lợi ích cốt lõi của Cloud Computing và mô hình kinh doanh Pay-as-you-go.
-- **Security:** Triển khai môi trường AWS Account theo tiêu chuẩn bảo mật Baseline.
-- **Professionalism:** Xây dựng Profile chuyên nghiệp và kết nối mạng lưới cộng đồng AWS Study Group.
-
-## 🛠️ Task Checklist
-### Technical Implementation
-- [x] **Source Control:** Khởi tạo GitHub Repository theo tiêu chuẩn dự án (README, .gitignore).
-- [x] **Cloud Provisioning:** Hoàn tất đăng ký AWS Free Tier và kích hoạt Credit (Exp: 09/2026).
-- [x] **Governance:** Thiết lập CloudWatch Billing Alarms và Zero-Threshold Budget để kiểm soát chi phí.
-- [x] **Networking:** Triển khai hạ tầng Custom VPC với phân vùng Public/Private Subnet.
-- [x] **S3 Hosting:** Khởi tạo và cấu hình S3 Bucket cho dịch vụ Static Website Hosting.
-- [x] **Data Protection:** Kích hoạt S3 Versioning nhằm đảm bảo tính toàn vẹn và khả năng phục hồi dữ liệu.
-- [x] **Web Engine:** Cài đặt và cấu hình Apache Web Server (httpd) trên thực thể EC2.
-- [x] **Static Networking:** Cấp phát Elastic IP đảm bảo địa chỉ kết nối cố định cho hệ thống.
-- [x] **Routing:** Cấu hình Internet Gateway và Route Table để điều phối lưu lượng mạng.
-- [x] **External Connectivity:** Cấu hình Internet Gateway (IGW) và Route Table cho VPC.
-- [x] **Validation:** Xác thực kết nối SSH qua Elastic IP thành công.
-- [x] **Process Management:** Triển khai PM2 để quản trị vòng đời ứng dụng.
-- [x] **Availability:** Cấu hình Daemon cho API/Service đảm bảo vận hành 24/7.
-
-### Personal Branding
-- [x] **LinkedIn Profile:** Cập nhật thông tin: "Bootcamp - First Cloud AI Journey @ AWS Study Group".
-- [x] **Community:** Kết nối thành công với đội ngũ Quản trị viên và cộng đồng học tập.
+## 📝 Project Overview
+- **Student:** [Tên của ông]
+- **Role:** Cloud Intern / AWS Learner
+- **Batch:** Bootcamp - First Cloud AI Journey @ AWS Study Group
+- **Duration:** 10/03/2026 - 14/03/2026
+- **Stack:** AWS (EC2, S3, VPC, IAM), Linux (AL2023), Apache, PM2.
 
 ---
 
-## 🧠 Technical Deep Dive
+## 🎯 Mục tiêu đào tạo (Week 1 Objectives)
+* [cite_start]**Kết nối cộng đồng:** Làm quen và kết nối với các thành viên, Quản trị viên của First Cloud Journey[cite: 5].
+* **Nền tảng Cloud:** Nắm vững 06 lợi ích cốt lõi của Cloud Computing và mô hình kinh doanh Pay-as-you-go.
+* [cite_start]**Quản trị tài khoản:** Hiểu và sử dụng thành thạo AWS Management Console & CLI[cite: 6].
+* **Bảo mật Baseline:** Triển khai môi trường AWS Account theo tiêu chuẩn bảo mật cao nhất ngay từ đầu.
+* **Thương hiệu cá nhân:** Xây dựng Profile chuyên nghiệp trên LinkedIn và GitHub.
+
+---
+## 📅 Nhật ký công việc chi tiết (Worklog Table)
+
+| Day | Task | Start Date | Completion Date | Reference Material |
+|:---:|:---|:---:|:---:|:---|
+| **1** | **Project Initiation & Governance:** <br> - Khởi tạo GitHub Repo (.gitignore, README). <br> - Kích hoạt AWS Free Tier & $100 Credit. <br> - Thiết lập Billing Alarms & Zero-Threshold Budget. | 03/10/2026 | 03/10/2026 | [AWS Billing Guide](https://aws.amazon.com/aws-cost-management/aws-budgets/) |
+| **2** | **Security & Static Storage:** <br> - IAM: Root Lockdown (MFA), tạo Group Admins. <br> - S3: Hosting Static Website, cấu hình Versioning & Bucket Policy. | 03/11/2026 | 03/11/2026 | [S3 Documentation](https://docs.aws.amazon.com/s3/) |
+| **3** | **Compute Provisioning:** <br> - Launch EC2 `t3.micro` (AL2023). <br> - Cài đặt Apache Web Server (httpd). <br> - Gán Elastic IP & cấu hình Security Group (Port 22, 80). | 03/12/2026 | 03/12/2026 | [EC2 User Guide](https://docs.aws.amazon.com/ec2/) |
+| **4** | **Advanced Network Architecture:** <br> - Triển khai Custom VPC (`Zehel-VPC`). <br> - Phân chia Public/Private Subnet. <br> - Cấu hình Internet Gateway (IGW) & Route Table. | 03/14/2026 | 03/14/2026 | [VPC Masterclass](https://docs.aws.amazon.com/vpc/) |
+| **5** | **Service Optimization:** <br> - Triển khai **PM2** quản lý tiến trình ngầm. <br> - Thiết lập Auto-restart & Log Monitoring cho dịch vụ. | 03/14/2026 | 03/14/2026 | [PM2 Quick Start](https://pm2.keymetrics.io/) |
+
+---
+## 🏆 Kết quả đạt được (Week 1 Achievements)
+
+### 1. Kiến thức nền tảng (Cloud Fundamentals)
+* [cite_start]Nắm vững các nhóm dịch vụ chính: Compute, Storage, Networking, Database [cite: 20-24].
+* Hiểu sâu về mô hình trách nhiệm chung (Shared Responsibility Model).
+
+### 2. Kỹ năng thực hành AWS CLI & Console
+* [cite_start]Thành thạo thao tác trên AWS Console: tìm kiếm, truy cập và cấu hình dịch vụ nhanh chóng[cite: 26].
+* [cite_start]Cài đặt và cấu hình AWS CLI hoàn chỉnh: Access Key, Secret Key, Default Region [cite: 27-30].
+* [cite_start]Sử dụng CLI để thực hiện các lệnh nâng cao: Kiểm tra account, liệt kê Regions, quản lý Key Pairs và giám sát tài nguyên đang chạy [cite: 31-36].
+
+### 3. Quản trị hạ tầng (Infrastructure Management)
+* **Networking:** Tự thiết kế và triển khai VPC Custom thay vì sử dụng cấu hình mặc định, đảm bảo tính cô lập và bảo mật cao.
+* [cite_start]**Compute:** Triển khai Web Server ổn định, xử lý thành công các vấn đề về Key Security (`chmod 400` và ACL trên Windows)[cite: 12].
+* **Storage:** Làm chủ S3 với các tính năng nâng cao như Versioning (chống ghi đè) và Bucket Policy (JSON access control).
+
+### 4. Personal Branding
+* Cập nhật LinkedIn chuyên nghiệp: "Bootcamp - First Cloud AI Journey @ AWS Study Group".
+* Kết nối thành công với mạng lưới chuyên gia trong cộng đồng.
+
+---
+
+## 🧠 Phân tích kỹ thuật (Technical Deep Dive)
 
 ### 🛡️ Identity & Access Management (IAM)
-- **Root Lockdown:** Thực thi chính sách bảo mật đa lớp (MFA) cho tài khoản Root ngay sau khi khởi tạo.
-- **IAM Hierarchy:** Triển khai cấu trúc nhóm quyền `Admins` với chính sách `AdministratorAccess`.
-    - *Best Practice:* Quản lý quyền hạn thông qua Group thay vì gán trực tiếp cho User để tối ưu hóa khả năng mở rộng (Scalability).
-- **Identity:** Thiết lập Account Alias `zehel-cloud` nhằm chuyên nghiệp hóa quy trình định danh và đăng nhập.
-
-### 🖥️ Compute & Network (EC2)
-- **Instance Provisioning:** Khởi tạo thực thể `t3.micro` (Amazon Linux 2023) tại Region Singapore (`ap-southeast-1`).
-- **Security Group (SG):** Cấu hình Port 22 (SSH).
-- **Key Management:** Khởi tạo RSA Key pair, thực thi phân quyền `chmod 400` và lưu trữ cục bộ an toàn.
-- **Key Security:** Xử lý lỗi bảo mật file `.pem` trên Windows bằng cách cấu hình lại Access Control List (ACL), đảm bảo nguyên tắc **Private Key Privacy** trước khi thiết lập kết nối.
-
-#### [Updated 2026-03-12]
-- **Web Server Deployment:** Triển khai **Apache (httpd)** trên Amazon Linux 2023. Tối ưu hóa quy trình khởi tạo bằng script hệ thống.
-- **Static Connectivity:** Gắn **Elastic IP** vào Instance, đảm bảo duy trì địa chỉ IP công cộng cố định khi thay đổi trạng thái hệ thống (Stop/Start).
-- **Traffic Control:** Mở rộng Security Group hỗ trợ giao thức **HTTP (Port 80)** song song với SSH.
-- **Performance Audit:** Sử dụng công cụ `lscpu` và `free -m` để giám sát tài nguyên, đảm bảo vận hành tối ưu trong giới hạn Free Tier.
-- **External Routing:** Triển khai **Internet Gateway**  và cấu hình Route Table điều hướng traffic (`0.0.0.0/0 -> IGW`) cho phân vùng Public.
-- **Static Access:** Gán thành công **Elastic IP** (`54.179.17.128`) cho Web Server, đảm bảo địa chỉ định danh không đổi khi khởi động lại Instance.
-- **Validation:** Kiểm tra và xác nhận khả năng kết nối SSH ổn định qua IP tĩnh.
+* **Root Lockdown:** Bảo vệ tuyệt đối tài khoản gốc bằng MFA.
+* **IAM Groups:** Quản lý quyền hạn theo nhóm thay vì gán trực tiếp cho User để tối ưu hóa khả năng mở rộng (Scalability).
+* **Account Alias:** Chuyên nghiệp hóa quy trình đăng nhập với định danh `zehel-cloud`.
 
 ### 🌐 Networking (VPC Architecture)
-- **VPC Customization:** Triển khai VPC với dải CIDR `10.0.0.0/16`, cô lập hoàn toàn với môi trường mặc định.
-- **Subnet Segmentation:** - **Public Subnet (`10.0.1.0/24`):** Thiết lập phân vùng biên (DMZ) cho các dịch vụ hướng ngoại.
-- **Private Subnet (`10.0.2.0/24`):** Thiết lập vùng an toàn cho Database/Backend, ngăn chặn truy cập trực tiếp từ Internet.
-- **Gateway & Routing:** Attach **Internet Gateway (IGW)** và cấu hình Route Table (`0.0.0.0/0 -> IGW`) để kích hoạt kết nối Internet cho phân vùng Public.
+* **Segmentation:** Việc phân chia Public/Private Subnet giúp bảo vệ các tài nguyên nhạy cảm (như Database) khỏi sự tiếp cận trực tiếp từ Internet.
+* **Routing:** Internet Gateway đóng vai trò là cửa ngõ duy nhất kết nối VPC với thế giới bên ngoài thông qua bảng định tuyến (Route Table).
 
 ### 🔄 Service Optimization & Daemonization
-- **Process Management:** Sử dụng **PM2 (Process Manager 2)** để quản lý các tiến trình chạy ngầm, thay thế phương thức chạy thủ công qua Terminal.
-- **High Availability:** Thiết lập cơ chế tự động khởi động lại (Auto-restart) khi tiến trình gặp sự cố, đảm bảo dịch vụ duy trì trạng thái **Zero Downtime**.
-- **Log Monitoring:** Triển khai giám sát log tập trung qua PM2 Logs giúp tối ưu hóa quy trình truy vết và xử lý lỗi thời gian thực.
-
-### 📦 Storage & Content Delivery (S3)
-- **Static Hosting:** Kích hoạt tính năng **Static Website Hosting**, thiết lập `index.html` làm entry point cho ứng dụng.
-- **Access Control:** Triển khai **Bucket Policy** (JSON) cấp quyền `s3:GetObject` cho Public Access, cho phép người dùng truy cập nội dung qua Internet.
-- **Data Reliability:** Kích hoạt **Versioning** để quản lý đa phiên bản Object, hỗ trợ khả năng Rollback dữ liệu và ngăn ngừa rủi ro ghi đè ngoài ý muốn.
+* **PM2:** Thay thế phương thức chạy script thủ công, cho phép ứng dụng tự hồi phục sau khi crash và quản lý log tập trung, giúp giảm thiểu thời gian gián đoạn dịch vụ.
 
 ---
 
-## 💡 Lessons Learned & Troubleshooting
+---
 
-| Issue | Root Cause | Solution |
+# 💡 Xử lý sự cố & Bài học kinh nghiệm (Troubleshooting)
+
+| Vấn đề (Issue) | Nguyên nhân (Root Cause) | Giải pháp (Solution) |
 | :--- | :--- | :--- |
-| **AWS Registration Fail** | Tài khoản thanh toán không đủ số dư xác thực ($1). | Đảm bảo số dư tối thiểu (> 50k VNĐ) và kích hoạt giao dịch quốc tế. |
-| **Security Risk** | Thiếu lớp bảo mật cho tài khoản đặc quyền. | **Security is Job Zero:** Kích hoạt MFA ngay lập tức cho Root & Admin. |
-| **Billing Management** | Rủi ro phát sinh chi phí ngoài dự kiến. | Thiết lập **Zero-Threshold Budget ($0.01)** để nhận cảnh báo tức thì. |
-| **S3 403 Forbidden** | Thiếu chính sách truy cập (Bucket Policy). | Cấu hình Policy cho phép `s3:GetObject` trên toàn bộ tài nguyên công khai. |
-| **SSH Timeout** | Chưa cấu hình Route Table trỏ ra IGW. | Thiết lập bản ghi định tuyến `0.0.0.0/0` trỏ về Internet Gateway trong VPC. |
-| **SSH Permission Denied** | File `.pem` trên Windows có quyền quá hở (`Unprotected Private Key`). | Sử dụng `icacls` để gỡ bỏ quyền kế thừa và chỉ cấp quyền Read cho User hiện hành. |
+| **AWS Registration Fail** | Số dư tài khoản không đủ $1 để xác thực. | Đảm bảo số dư > 50.000 VNĐ và mở khóa thanh toán quốc tế. |
+| **Security Risk** | Tài khoản đặc quyền thiếu lớp bảo mật. | Kích hoạt MFA ngay lập tức cho Root & Admin. |
+| **Billing Management** | Rủi ro phát sinh phí ngoài dự kiến. | Thiết lập **Zero-Threshold Budget ($0.01)** để nhận cảnh báo sớm nhất. |
+| **S3 403 Forbidden** | Thiếu chính sách truy cập (Bucket Policy). | Cấu hình Policy JSON cho phép hành động `s3:GetObject`. |
+| **SSH Timeout** | Route Table chưa trỏ ra Internet Gateway (IGW). | Thêm bản ghi định tuyến `0.0.0.0/0` trỏ về IGW của VPC. |
+| **SSH Permission Denied** | File `.pem` trên Windows có quyền quá rộng. | Dùng `icacls` gỡ quyền kế thừa, chỉ cấp quyền Read cho User hiện hành. |
+
 ---
 
-## 📅 Timeline & Milestones
-
-### [2026-03-10] Phase 1: Project Initiation & Governance
-- **Status:** **ACCOUNT ACTIVATED.**
-- **Details:** Hoàn tất xác thực phương thức thanh toán và kích hoạt tài khoản thành công.
-- **Update:** Xác nhận nhận **$100.00 USD AWS Credits** phục vụ quá trình đào tạo.
-
-### [2026-03-11] Phase 2: Security & Static Storage Baseline
-- **Status:** **FULLY COMPLETED.**
-- **Foundation:** Tùy chỉnh Console điều hướng (Pinned: EC2, S3, IAM, Billing) để tối ưu workflow.
-- **S3 Hosting (Part 1):** Khởi tạo thành công S3 Bucket và Endpoint truy cập công khai.
-
-### [2026-03-12] Phase 3: Compute Provisioning & Website Deployment
-- **Status:** **SUCCESSFULLY DEPLOYED.**
-- **S3 Finalization:** Tri ển khai thành công Access Policy và cơ chế bảo vệ dữ liệu với **S3 Versioning**.
-- **EC2 Web Server:** Khởi tạo `t3.mic
-- **Segmentation:** Phân chia Public/Private Subnet chuẩn xác, sẵn sàng cho mô hình Multi-tier Architecture.
-
-### [2026-03-14] Phase 5: Service Optimization & Reliability
-- **Status:** **OPERATIONAL.**ro` chạy Apache Engine ổn định trên nền tảng **Elastic IP**.
-- **Next Task:** Nghiên cứu tích hợp CI/CD hoặc triển khai Database (RDS).
-
-### [2026-03-14] Phase 4: Advanced Network Architecture (VPC)
-- **Status:** **INFRASTRUCTURE READY.**
-- **Networking:** Hoàn tất thiết kế hạ tầng **Custom VPC** (`Zehel-VPC`).
-- **Process Management:** Chuyển đổi kiến trúc vận hành sang chế độ background process với **PM2**.
-- **Availability:** Đảm bảo dịch vụ chạy ngầm 24/7 với cơ chế tự động khởi động lại và giám sát Log thời gian thực.
-- **Next Step:** Thiết lập quy trình đồng bộ mã nguồn tự động trực tiếp từ GitHub Repo.
+## 🚀 Định hướng tuần tiếp theo (Next Steps)
+* Nghiên cứu tích hợp quy trình CI/CD tự động từ GitHub.
+* Triển khai Database Layer với AWS RDS.
+* Thiết lập quy trình đồng bộ mã nguồn tự động trực tiếp lên máy chủ EC2.
