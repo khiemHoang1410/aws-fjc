@@ -1,11 +1,11 @@
 # AWS Cloud Infrastructure & Serverless Implementation - Week 2
 
 ## 📝 Project Overview
-- **Student:** [Tên của ông]
-- **Role:** Cloud Intern / AWS Learner
+- **Student:** Hoàng Sỹ Khiêm
+- **Role:** Cloud Intern / AWS Learner / Team leader
 - **Batch:** Bootcamp - First Cloud AI Journey @ AWS Study Group
-- **Duration:** 10/03/2026 - 14/03/2026
-- **Stack:** AWS (EC2, S3, VPC, IAM), Linux (AL2023), Apache, PM2.
+- **Duration:** 16/03/2026 - 22/03/2026
+- **Stack:** AWS Serverless (SST v3, Lambda, DynamoDB, S3, Cognito, API Gateway, CloudFront, VPC), React + Vite 6, TypeScript, Swagger UI.
 
 ## 📝 Project Overview
 Tài liệu này tổng hợp chi tiết lộ trình triển khai, cấu hình và tối ưu hóa hạ tầng điện toán đám mây trên nền tảng **Amazon Web Services (AWS)** trong tuần thứ 2. Trọng tâm của giai đoạn này là sự dịch chuyển mang tính chiến lược từ kiến trúc Monolithic truyền thống sang mô hình **Serverless (SST v3 - Ion)**. Mục tiêu cuối cùng là thiết lập một hệ thống có khả năng tự động mở rộng (Scalability), tối ưu hóa chi phí vận hành và đảm bảo tính sẵn sàng cao (High Availability) trên nhiều vùng khả dụng (Multi-AZ).
@@ -13,8 +13,6 @@ Tài liệu này tổng hợp chi tiết lộ trình triển khai, cấu hình v
 ---
 
 # 🎯 1. Mục tiêu đào tạo (Training Objectives)
-
-Trong tuần này, các mục tiêu chiến lược được đề ra bao gồm:
 
 * **High Availability & Fault Tolerance:** Thiết kế và triển khai kiến trúc trên nhiều Availability Zones (Multi-AZ) nhằm loại bỏ hoàn toàn các điểm nghẽn đơn lẻ (Single Point of Failure), đảm bảo hệ thống vẫn vận hành ổn định ngay cả khi một vùng gặp sự cố.
 * **Elastic Scalability:** Xây dựng cơ chế tự động hóa việc co giãn tài nguyên (Auto Scaling) dựa trên phân tích lưu lượng truy cập thực tế, giúp cân bằng giữa hiệu năng và chi phí.

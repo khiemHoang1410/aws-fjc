@@ -4,7 +4,7 @@
 - **Student:** [Tên của ông]
 - **Role:** Cloud Intern / AWS Learner
 - **Batch:** Bootcamp - First Cloud AI Journey @ AWS Study Group
-- **Duration:** 10/03/2026 - 14/03/2026
+- **Duration:** 09/03/2026 - 15/03/2026
 - **Stack:** AWS (EC2, S3, VPC, IAM), Linux (AL2023), Apache, PM2.
 
 ---
