@@ -63,40 +63,19 @@ Tuần 3 đánh dấu giai đoạn **Full-stack Handshake Orchestration**, tập
 Hệ thống chuyển dịch từ cơ chế xác thực cơ bản sang mô hình quản lý định danh chuyên sâu:
 * **Identity Handshake:** Khi xác thực thành công, Cognito cấp phát bộ 3 Token (Id, Access, Refresh). Frontend thực hiện bóc tách `groups` claim từ JWT để thực thi phân quyền (RBAC) ngay tại lớp giao diện.
 * **Security Interceptor Workflow:** Triển khai Middleware tự động đánh chặn Request để gắn `Authorization` header. Hệ thống có khả năng tự phục hồi phiên đăng nhập thông qua cơ chế **Token Rotation (Refresh Flow)** và thu hồi quyền truy cập tức thì bằng **GlobalSignOut**.
-
 ### 🌐 2. Secure Hybrid Networking (VPC Hardening)
 Kiến trúc mạng được thiết kế theo tiêu chuẩn "Defense in Depth" (Phòng thủ chiều sâu):
 * **Network Isolation:** Toàn bộ logic xử lý (Lambda) được cô lập trong Private Subnet, giao tiếp với Internet qua NAT Gateway để ẩn danh hạ tầng.
 * **Backbone Traffic Optimization:** Sử dụng **VPC Endpoints** (S3/DynamoDB Gateway & Cognito Interface) để giữ dữ liệu nhạy cảm lưu thông hoàn toàn trong mạng nội bộ AWS, giúp tối ưu chi phí và triệt tiêu độ trễ Internet.
-
 ### ⚡ 3. High-Performance Data Engineering
 Tối ưu hóa khả năng truy xuất dữ liệu lớn trên nền tảng NoSQL:
 * **Cursor-based Pagination:** Thay thế cơ chế `offset` truyền thống bằng `ExclusiveStartKey` của DynamoDB. Kỹ thuật này đảm bảo tốc độ phản hồi `O(1)` bất kể quy mô bản ghi (Dataset size), cung cấp luồng dữ liệu mượt mà cho trải nghiệm người dùng.
 * **Resilient Data Policy:** Thực thi chính sách `retainOnDelete: true`. Đây là lớp bảo hiểm quan trọng trong Cloud, đảm bảo dữ liệu trong S3 và DynamoDB luôn tồn tại vĩnh viễn (Data Persistence) kể cả khi hạ tầng compute bị gỡ bỏ.
-### 🔐 1. Identity & Access Orchestration (Cognito + RBAC)
-Hệ thống chuyển dịch từ cơ chế xác thực cơ bản sang mô hình quản lý định danh chuyên sâu:
-* **Identity Handshake:** Khi xác thực thành công, Cognito cấp phát bộ 3 Token (Id, Access, Refresh). Frontend thực hiện bóc tách `groups` claim từ JWT để thực thi phân quyền (RBAC) ngay tại lớp giao diện.
-* **Security Interceptor Workflow:** Triển khai Middleware tự động đánh chặn Request để gắn `Authorization` header. Hệ thống có khả năng tự phục hồi phiên đăng nhập thông qua cơ chế **Token Rotation (Refresh Flow)** và thu hồi quyền truy cập tức thì bằng **GlobalSignOut**.
-
-### 🌐 2. Secure Hybrid Networking (VPC Hardening)
-Kiến trúc mạng được thiết kế theo tiêu chuẩn "Defense in Depth" (Phòng thủ chiều sâu):
-* **Network Isolation:** Toàn bộ logic xử lý (Lambda) được cô lập trong Private Subnet, giao tiếp với Internet qua NAT Gateway để ẩn danh hạ tầng.
-* **Backbone Traffic Optimization:** Sử dụng **VPC Endpoints** (S3/DynamoDB Gateway & Cognito Interface) để giữ dữ liệu nhạy cảm lưu thông hoàn toàn trong mạng nội bộ AWS, giúp tối ưu chi phí và triệt tiêu độ trễ Internet.
-
-### ⚡ 3. High-Performance Data Engineering
-Tối ưu hóa khả năng truy xuất dữ liệu lớn trên nền tảng NoSQL:
-* **Cursor-based Pagination:** Thay thế cơ chế `offset` truyền thống bằng `ExclusiveStartKey` của DynamoDB. Kỹ thuật này đảm bảo tốc độ phản hồi `O(1)` bất kể quy mô bản ghi (Dataset size), cung cấp luồng dữ liệu mượt mà cho trải nghiệm người dùng.
-* **Resilient Data Policy:** Thực thi chính sách `retainOnDelete: true`. Đây là lớp bảo hiểm quan trọng trong Cloud, đảm bảo dữ liệu trong S3 và DynamoDB luôn tồn tại vĩnh viễn (Data Persistence) kể cả khi hạ tầng compute bị gỡ bỏ.
-
 ### 🏗️ 4. Scalable Software Design Patterns
 Áp dụng các chuẩn mực thiết kế phần mềm hiện đại để tăng khả năng bảo trì:
 * **URL-driven Architecture:** Chuyển đổi từ Redux-state sang **React Router v7**. Việc đồng bộ trạng thái ứng dụng với URL giúp hỗ trợ Deep Linking, tối ưu SEO và tận dụng tối đa cơ chế Native Navigation của trình duyệt.
 * **Adapter & Router Decoupling:** - **Adapter Layer:** Đóng vai trò "người phiên dịch", chuẩn hóa dữ liệu từ API thô sang cấu trúc Object phù hợp cho UI, triệt tiêu sự phụ thuộc cứng (Hard-coupling) giữa FE và BE.
-    - **Router Extraction:** Tách biệt định tuyến khỏi cấu hình hạ tầng, cho phép nhà phát triển mở rộng API theo hướng Modular hóa.
-
-### 🧪 5. Quality Assurance & Observability
-* **Automated Testing (Vitest):** Duy trì bộ 30+ Unit Tests cho các Service cốt lõi, đảm bảo tính đúng đắn của logic nghiệp vụ trước khi triển khai (Production Readiness).
-* **Structured JSON Logging:** Chuẩn hóa Log đầu ra dưới dạng JSON. Điều này biến CloudWatch từ một kho chứa text vô tri thành một công cụ phân tích mạnh mẽ, hỗ trợ truy vấn SQL-like qua Logs Insights để xử lý sự cố trong vài giây.
+* **Router Extraction:** Tách biệt định tuyến khỏi cấu hình hạ tầng, cho phép nhà phát triển mở rộng API theo hướng Modular hóa.
 ### 🧪 5. Quality Assurance & Observability
 * **Automated Testing (Vitest):** Duy trì bộ 30+ Unit Tests cho các Service cốt lõi, đảm bảo tính đúng đắn của logic nghiệp vụ trước khi triển khai (Production Readiness).
 * **Structured JSON Logging:** Chuẩn hóa Log đầu ra dưới dạng JSON. Điều này biến CloudWatch từ một kho chứa text vô tri thành một công cụ phân tích mạnh mẽ, hỗ trợ truy vấn SQL-like qua Logs Insights để xử lý sự cố trong vài giây.
